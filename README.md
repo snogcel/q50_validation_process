@@ -2,7 +2,7 @@
 
 I am documenting the data validation process to assemble a Case Study.
 
-See: https://github.com/snogcel/randomly-read/blob/0e0b9db84106b050ee66739131982174038195f4/website_messaging/Lead%20Generation%20Campaign.md
+See: https://github.com/snogcel/randomly-read/blob/master/website_messaging/Lead%20Generation%20Campaign.md
 
 > https://github.com/snogcel/q50_validation_process/commits/main/
 
