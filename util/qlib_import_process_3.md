@@ -198,3 +198,29 @@ RSV1
 RSV2
 RSV3
 LABEL0
+
+# Data Validated! https://github.com/snogcel/qlib_trading_v2/commit/e9a789bd664354c1c588c5537e9375ec71ad6981
+
+# Backtester still needs some work:
+
+(my_env_3_11) C:\Projects\qlib_trading_v2>conda run --name my_env_3_11 python c:/Projects/qlib_trading_v2/src/backtesting/backtester.py
+No price file specified, will simulate from returns
+Starting Hummingbot backtest with 0 observations...
+Trading pair: BTCUSDT
+Long threshold: 0.6, Short threshold: 0.6
+No price data provided, simulating from returns...
+Simulating prices from returns
+
+Traceback (most recent call last):
+  File "c:\Projects\qlib_trading_v2\src\backtesting\backtester.py", line 1367, in <module>
+    backtester, results = run_hummingbot_backtest()
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Projects\qlib_trading_v2\src\backtesting\backtester.py", line 1356, in run_hummingbot_backtest
+    results = backtester.run_backtest(df, price_data=price_data, price_col='close', return_col='truth')
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "c:\Projects\qlib_trading_v2\src\backtesting\backtester.py", line 829, in run_backtest
+    final_portfolio_value = self.balance + self.position * current_price
+                                                           ^^^^^^^^^^^^^
+UnboundLocalError: cannot access local variable 'current_price' where it is not associated with a value
+
+ERROR conda.cli.main_run:execute(127): `conda run python c:/Projects/qlib_trading_v2/src/backtesting/backtester.py` failed. (See above for error)
