@@ -157,3 +157,44 @@ fields += [
 
 # TO-DO: https://github.com/snogcel/qlib_trading_v2/commit/27e6e72db54e08a5c2fcaf63e7dfe0908aca744e
 
+# Input Data Columns:
+
+$close
+$high
+$low
+$open
+$tradecount
+$volume_btc
+$volume_usdt
+
+# TO-DO: align these against qlib_trader_v2
+
+$close
+$high
+$low
+$open
+$volume
+
+# Fix QLib_Trader_V2 to utilize these column names, and then perform a backtest to validate results.
+
+
+# Features (outlined above):
+
+$realized_vol_6
+$relative_volatility_index
+$momentum_5
+$momentum_10
+$momentum_25
+$high_vol_flag
+vol_raw
+vol_raw_decile
+vol_risk
+vol_scaled
+vol_raw_momentum
+vol_momentum_scaled
+OPEN1
+VOLUME1
+RSV1
+RSV2
+RSV3
+LABEL0
