@@ -17,5 +17,6 @@ python scripts/check_data_health.py --qlib_dir 'C:\\Projects\\q50_validation_pro
 # Work, a service provided in exchange for Goods and or Services.
 # If you like what you do, you'll never work a day in your life.
 
+# TO DO: Review Data Discrepency against: https://finance.yahoo.com/quote/USDT-BTC/history/?period1=1588809600&period2=1602028800
 
 
