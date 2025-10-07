@@ -12,9 +12,9 @@ End Date: \[December 27th, 2025 - 12 weeks from start]
 
 ## Campaign Overview
 
-This campaign will establish Black Circle Technologies, LLC as the technical support provider for enterprise-grade DeFi data collection and analysis (see <a href="https://github.com/snogcel/geckoterminal_collector">geckoterminal_collector</a>, an open-source product I have developed). 
+### Goal: Establish Black Circle Technologies, LLC as the technical support provider for an open source data collection platform.
 
-The primary objectives are to increase brand awareness within the blockchain development and institutional finance sectors and to generate qualified leads. By showcasing our platform's technical superiority—including automated market opportunity detection, exceptional system reliability, and seamless multi-network integration—we aim to attract high-value clients looking for a competitive edge in the DeFi space.
+This campaign will establish Black Circle Technologies, LLC as the technical support provider for enterprise-grade DeFi data collection and analysis (see <a href="https://github.com/snogcel/geckoterminal_collector">geckoterminal_collector</a>, an open-source product I have developed). The primary objectives are to increase brand awareness within the blockchain development and institutional finance sectors and to generate qualified leads. By showcasing our platform's technical superiority—including automated market opportunity detection, exceptional system reliability, and seamless multi-network integration—we aim to attract high-value clients looking for a competitive edge in the DeFi space.
 
 ## Objectives
 
