@@ -46,3 +46,12 @@ python scripts/check_data_health.py --qlib_dir 'C:\\Projects\\q50_validation_pro
 # TO DO: Review Data Discrepency against: https://finance.yahoo.com/quote/USDT-BTC/history/?period1=1588809600&period2=1602028800
 
 
+# next, review against previously completed work:
+
+train_start_time = "2018-08-02"
+train_end_time = "2023-12-31"
+valid_start_time = "2024-01-01"
+valid_end_time = "2024-09-30"
+test_start_time = "2024-10-01"
+test_end_time = "2025-04-01"
+
