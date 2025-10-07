@@ -151,3 +151,7 @@ fields += [
     'Std(Log($close / Ref($close, 1)), 6) - Ref(Std(Log($close / Ref($close, 1)), 6), 1)',
     '(Std(Log($close / Ref($close, 1)), 6) - Ref(Std(Log($close / Ref($close, 1)), 6), 1)) * 2000'
 ]
+
+
+# Move Validated Data back to QLib_Trader_v2: https://github.com/snogcel/qlib_trading_v2/commit/71318d231875631352cbe35f55df41ac51ed28ea
+
