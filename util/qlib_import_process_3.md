@@ -89,4 +89,65 @@ btcusdt    2020-05-01  8620.000000   9059.179688  8613.559570  8826.959961
            2020-05-29  9575.870117   9605.259766  9330.000000  9427.070312
            2020-05-30  9426.599609   9740.000000  9331.230469  9697.719727
            2020-05-31  9697.719727   9700.000000  9381.410156  9448.269531
-           
+
+# next, verify 60min data:
+                                      $open  ...       $close
+instrument datetime                          ...
+btcusdt    2020-05-01 00:00:00  8620.000000  ...  8707.509766
+           2020-05-01 01:00:00  8707.500000  ...  8662.610352
+           2020-05-01 02:00:00  8663.070312  ...  8726.360352
+           2020-05-01 03:00:00  8725.500000  ...  8675.349609
+           2020-05-01 04:00:00  8675.099609  ...  8791.589844
+...                                     ...  ...          ...
+           2020-05-30 20:00:00  9535.129883  ...  9440.610352
+           2020-05-30 21:00:00  9440.459961  ...  9491.410156
+           2020-05-30 22:00:00  9492.440430  ...  9729.000000
+           2020-05-30 23:00:00  9729.000000  ...  9697.719727
+           2020-05-31 00:00:00  9697.719727  ...  9656.669922
+
+# Then, document the features being created and used as part of this predictive model.
+
+config={
+    "kbar": {},  # Use optimized kbar features
+    "price": {
+        "windows": [1],  # Only OPEN1 (OPEN2/3 removed due to high correlation)
+        "feature": ['OPEN'],
+    },
+    "volume": {
+        "windows": [1],  # Only VOLUME1 (VOLUME2/3 removed due to high correlation)
+    },
+    "rolling": {
+        "windows": [1, 2, 3],  # Reduced window set
+        "include": ['RSV'],  # Keep only most valuable rolling features
+    },
+}
+
+# Optimized kbar features (removed redundant volatility measures)
+fields += [
+    
+    # realized_vol_6
+    'Std(Log($close / Ref($close, 1)), 6)',
+    
+    # ── Relative volatility (short/long)
+    'Std(Log($close / Ref($close, 1)), 5) / Std(Log($close / Ref($close, 1)), 20)', 
+
+    # ── Rolling price momentum for directional context
+    '$close / Ref($close, 5) - 1', # 5 hours
+    '$close / Ref($close, 10) - 1', # 10 hours
+    '$close / Ref($close, 25) - 1', # 25 hours
+
+    # ── High-volatility regime flag
+    "If(Std(Log($close / Ref($close, 1)), 5) / Std(Log($close / Ref($close, 1)), 20) > 1.25, 1, 0)", 
+    
+    #'If(Std(Log($close / Ref($close, 1)), 6) > Quantile(Std(Log($close / Ref($close, 1)), 6), 180, 0.9), 1, 0)', 
+    #'If(Std(Log($close / Ref($close, 1)), 6) > Quantile(Std(Log($close / Ref($close, 1)), 6), 180, 0.7), 1, 0)', 
+    #'If(Std(Log($close / Ref($close, 1)), 6) < Quantile(Std(Log($close / Ref($close, 1)), 6), 180, 0.3), 1, 0)', 
+    #'If(Std(Log($close / Ref($close, 1)), 6) < Quantile(Std(Log($close / Ref($close, 1)), 6), 180, 0.1), 1, 0)', 
+    
+    'Std(Log($close / Ref($close, 1)), 6)',
+    'Rank(Std(Log($close / Ref($close, 1)), 6), 180) / 180 * 10',
+    'Std(Log($close / Ref($close, 1)), 6) * Std(Log($close / Ref($close, 1)), 6)',
+    '(Std(Log($close / Ref($close, 1)), 6) - Quantile(Std(Log($close / Ref($close, 1)), 6), 30, 0.01)) / (Quantile(Std(Log($close / Ref($close, 1)), 6), 30, 0.99) - Quantile(Std(Log($close / Ref($close, 1)), 6), 30, 0.01))',
+    'Std(Log($close / Ref($close, 1)), 6) - Ref(Std(Log($close / Ref($close, 1)), 6), 1)',
+    '(Std(Log($close / Ref($close, 1)), 6) - Ref(Std(Log($close / Ref($close, 1)), 6), 1)) * 2000'
+]
