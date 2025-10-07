@@ -224,3 +224,74 @@ Traceback (most recent call last):
 UnboundLocalError: cannot access local variable 'current_price' where it is not associated with a value
 
 ERROR conda.cli.main_run:execute(127): `conda run python c:/Projects/qlib_trading_v2/src/backtesting/backtester.py` failed. (See above for error)
+
+# Backtesting Prior to Data Validation:
+
+No price file specified, will simulate from returns
+Starting Hummingbot backtest with 10000 observations...
+Trading pair: BTCUSDT
+Long threshold: 0.6, Short threshold: 0.6
+No price data provided, simulating from returns...
+Simulating prices from returns
+Processed 0/10000 observations, Price: $100.00, Portfolio: $99,997.85
+Processed 1000/10000 observations, Price: $90.39, Portfolio: $96,621.24
+Processed 2000/10000 observations, Price: $118.56, Portfolio: $101,710.27
+Processed 3000/10000 observations, Price: $146.15, Portfolio: $112,236.97
+Processed 4000/10000 observations, Price: $135.88, Portfolio: $114,873.05
+Processed 5000/10000 observations, Price: $228.23, Portfolio: $116,356.59
+Processed 6000/10000 observations, Price: $213.99, Portfolio: $114,445.37
+Processed 7000/10000 observations, Price: $233.68, Portfolio: $121,115.38
+Processed 8000/10000 observations, Price: $197.01, Portfolio: $118,774.25
+Processed 9000/10000 observations, Price: $206.57, Portfolio: $125,414.04
+Backtest completed. Final portfolio value: $126,698.82
+
+=== HUMMINGBOT QUANTILE BACKTEST REPORT ===
+
+CONFIGURATION:
+- Trading Pair: BTCUSDT
+- Initial Balance: $100,000.00
+- Long Threshold: 0.60
+- Short Threshold: 0.60
+- Max Position: 30.0%
+- Fee Rate: 0.100%
+
+POSITION MANAGEMENT:
+- Neutral Close Threshold: 0.70
+- Min Confidence to Hold: 1.0
+- Opposing Signal Threshold: 0.40
+
+PERFORMANCE SUMMARY:
+- Total Return: 26.71%
+- Annualized Return: 23.04%
+- Volatility: 12.86%
+- Sharpe Ratio: 1.68
+- Max Drawdown: -6.51%
+
+TRADING STATISTICS:
+- Total Trades: 3,522
+- Total Holds: 6,306
+- Trade Frequency: 35.22%
+- Hold Frequency: 63.06%
+- Win Rate: 8.83%
+
+HOLD ANALYSIS:
+- HOLD_POSITION: 6,306 periods
+
+FINAL STATE:
+- Final Balance: $126,698.82
+- Final Position: 0.0000
+- Final Portfolio Value: $126,709.94
+
+OBSERVATIONS: 10,000
+
+  - signal_summary_stats.json (quick signal analysis statistics)
+
+Hummingbot backtest results saved to hummingbot_backtest_results
+  - portfolio_history.csv (portfolio evolution with hold/trade actions)
+  - trades.csv (individual trades)
+  - holds_analysis.csv (detailed hold state analysis)
+  - signal_analysis_pivot.csv (pivot-ready signal vs trade analysis)
+  - metrics.json (performance metrics)
+  - report.txt (summary report)
+
+  
