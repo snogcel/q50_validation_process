@@ -294,4 +294,26 @@ Hummingbot backtest results saved to hummingbot_backtest_results
   - metrics.json (performance metrics)
   - report.txt (summary report)
 
-  
+
+
+# Backtesting Parameters:
+
+rain_start_time = "2018-08-02"
+train_end_time = "2023-12-31"
+valid_start_time = "2024-01-01"
+valid_end_time = "2024-09-30"
+test_start_time = "2024-10-01"
+test_end_time = "2025-04-01"
+
+fit_start_time = None
+fit_end_time = None
+
+provider_uri = "/Projects/qlib_trading_v2/qlib_data/CRYPTO_DATA"
+
+SEED = 23020 # RANDOM SEED for Entropy Purposes, see: https://thinkingmachines.ai/blog/defeating-nondeterminism-in-llm-inference/
+MARKET = "all"
+BENCHMARK = "BTCUSDT"
+EXP_NAME = "crypto_exp_101"
+FREQ = "day"
+
+qlib.init(provider_uri=provider_uri, region=REG_US)
