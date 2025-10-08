@@ -317,3 +317,16 @@ EXP_NAME = "crypto_exp_101"
 FREQ = "day"
 
 qlib.init(provider_uri=provider_uri, region=REG_US)
+
+
+# TODO:
+# Case Study Summary - https://www.geeksforgeeks.org/machine-learning/lightgbm-light-gradient-boosting-machine/
+
+# https://github.com/snogcel/qlib_trading_v2/blob/main/hummingbot_backtest_results/metrics.json
+
+# https://github.com/snogcel/qlib_trading_v2/commit/d17245f1b068a9ef52c2780f78454817cb323e8b
+
+# Decision Trees at 11 depth at Q10, Q50, Q90 should provide the best predictive model.
+- TODO - validate new dataset
+
+
