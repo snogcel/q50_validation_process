@@ -400,3 +400,46 @@ CORE_LGBM_PARAMS = {
 
     }
 ```
+
+
+### Fixed Data Alignment Issue:
+
+```bash
+(gecko_env_3_11) C:\Projects\q50_validation_process>conda run --name gecko_env_3_11 python c:/Projects/q50_validation_process/qlib_data_integrity_check.py
+                               $btc_dom  $fg_index
+instrument        datetime
+gdelt_btc_feat_v2 2020-05-01  66.444366       40.0
+                  2020-05-02  66.737556       40.0
+                  2020-05-03  66.848862       45.0
+                  2020-05-04  67.187782       44.0
+                  2020-05-05  68.012733       40.0
+                  2020-05-06  68.922737       42.0
+                  2020-05-07  68.414680       49.0
+                  2020-05-08  67.941666       55.0
+                  2020-05-09  67.976028       56.0
+                  2020-05-10  67.635994       48.0
+                  2020-05-11  67.770149       40.0
+                  2020-05-12  68.262764       39.0
+                  2020-05-13  68.428902       41.0
+                  2020-05-14  67.986221       40.0
+                  2020-05-15  67.807632       44.0
+                  2020-05-16  68.127090       41.0
+                  2020-05-17  67.731743       40.0
+                  2020-05-18  67.916229       50.0
+                  2020-05-19  67.653633       50.0
+                  2020-05-20  67.472656       52.0
+                  2020-05-21  66.981354       49.0
+                  2020-05-22  67.097946       42.0
+                  2020-05-23  66.645592       40.0
+                  2020-05-24  66.599747       43.0
+                  2020-05-25  66.645515       41.0
+                  2020-05-26  67.056747       39.0
+                  2020-05-27  67.210938       39.0
+                  2020-05-28  66.872803       41.0
+                  2020-05-29  66.190613       48.0
+                  2020-05-30  66.390572       48.0
+                  2020-05-31  65.129715       51.0
+
+[3200:MainThread](2025-10-08 08:09:13,779) INFO - qlib.Initialization - [config.py:452] - default_conf: client.
+[3200:MainThread](2025-10-08 08:09:14,365) INFO - qlib.Initialization - [__init__.py:75] - qlib successfully initialized based on client settings.
+[3200:MainThread](2025-10-08 08:09:14,365) INFO - qlib.Initialization - [__init__.py:77] - data_path={'__DEFAULT_FREQ': WindowsPath('C:/Projects/q50_validation_process/qlib_data/CRYPTODATA_VALIDATED_2')}```
