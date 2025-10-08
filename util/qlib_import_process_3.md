@@ -534,3 +534,15 @@ KeyError: 'label'
 
 ERROR conda.cli.main_run:execute(127): `conda run python c:/Projects/q50_validation_process/qlib_data_integrity_check.py` failed. (See above for error)
 ```
+
+### Bug Fixed
+
+> https://github.com/snogcel/q50_validation_process/commit/0afb99b8d172ee688f1c62a10b54220f6ad7f56d#diff-5d12afae98d94404e4b3dbbf3e033ffada6a6c0fd86d4c4bef400e1d3cc13861
+
+```bash
+    },
+    "Volume_USDT": {
+        "windows": [1],  # Only VOLUME1 (VOLUME2/3 removed due to high correlation)
+    },
+```
+
