@@ -443,3 +443,94 @@ gdelt_btc_feat_v2 2020-05-01  66.444366       40.0
 [3200:MainThread](2025-10-08 08:09:13,779) INFO - qlib.Initialization - [config.py:452] - default_conf: client.
 [3200:MainThread](2025-10-08 08:09:14,365) INFO - qlib.Initialization - [__init__.py:75] - qlib successfully initialized based on client settings.
 [3200:MainThread](2025-10-08 08:09:14,365) INFO - qlib.Initialization - [__init__.py:77] - data_path={'__DEFAULT_FREQ': WindowsPath('C:/Projects/q50_validation_process/qlib_data/CRYPTODATA_VALIDATED_2')}```
+
+### TO-DO: Debug Data Loaders
+
+```bash
+(gecko_env_3_11) C:\Projects\q50_validation_process>conda run --name gecko_env_3_11 python c:/Projects/q50_validation_process/qlib_data_integrity_check.py
+                               $btc_dom  $fg_index
+instrument        datetime
+gdelt_btc_feat_v2 2020-05-01  66.444366       40.0
+                  2020-05-02  66.737556       40.0
+                  2020-05-03  66.848862       45.0
+                  2020-05-04  67.187782       44.0
+                  2020-05-05  68.012733       40.0
+                  2020-05-06  68.922737       42.0
+                  2020-05-07  68.414680       49.0
+                  2020-05-08  67.941666       55.0
+                  2020-05-09  67.976028       56.0
+                  2020-05-10  67.635994       48.0
+                  2020-05-11  67.770149       40.0
+                  2020-05-12  68.262764       39.0
+                  2020-05-13  68.428902       41.0
+                  2020-05-14  67.986221       40.0
+                  2020-05-15  67.807632       44.0
+                  2020-05-16  68.127090       41.0
+                  2020-05-17  67.731743       40.0
+                  2020-05-18  67.916229       50.0
+                  2020-05-19  67.653633       50.0
+                  2020-05-20  67.472656       52.0
+                  2020-05-21  66.981354       49.0
+                  2020-05-22  67.097946       42.0
+                  2020-05-23  66.645592       40.0
+                  2020-05-24  66.599747       43.0
+                  2020-05-25  66.645515       41.0
+                  2020-05-26  67.056747       39.0
+                  2020-05-27  67.210938       39.0
+                  2020-05-28  66.872803       41.0
+                  2020-05-29  66.190613       48.0
+                  2020-05-30  66.390572       48.0
+                  2020-05-31  65.129715       51.0
+KeyError: 'label'
+
+[40108:MainThread](2025-10-08 08:16:03,630) INFO - qlib.Initialization - [config.py:452] - default_conf: client.
+[40108:MainThread](2025-10-08 08:16:04,320) INFO - qlib.Initialization - [__init__.py:75] - qlib successfully initialized based on client settings.
+[40108:MainThread](2025-10-08 08:16:04,320) INFO - qlib.Initialization - [__init__.py:77] - data_path={'__DEFAULT_FREQ': WindowsPath('C:/Projects/q50_validation_process/qlib_data/CRYPTODATA_VALIDATED_2')}
+[40108:MainThread](2025-10-08 08:16:04,355) INFO - qlib.timer - [log.py:127] - Time cost: 0.005s | Loading data Done
+[40108:MainThread](2025-10-08 08:16:04,355) ERROR - qlib.workflow - [utils.py:41] - An exception has been raised[KeyError: 'label'].
+  File "c:\Projects\q50_validation_process\qlib_data_integrity_check.py", line 173, in <module>
+    dataset = init_instance_by_config(task_config["dataset"])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Jon Kindel\.conda\envs\gecko_env_3_11\Lib\site-packages\qlib\utils\mod.py", line 180, in init_instance_by_config
+    return klass(**cls_kwargs, **try_kwargs, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Jon Kindel\.conda\envs\gecko_env_3_11\Lib\site-packages\qlib\data\dataset\__init__.py", line 119, in __init__
+    self.handler: DataHandler = init_instance_by_config(handler, accept_types=DataHandler)
+                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Jon Kindel\.conda\envs\gecko_env_3_11\Lib\site-packages\qlib\utils\mod.py", line 180, in init_instance_by_config
+    return klass(**cls_kwargs, **try_kwargs, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Jon Kindel\.conda\envs\gecko_env_3_11\Lib\site-packages\qlib\data\dataset\handler.py", line 509, in __init__
+    super().__init__(instruments, start_time, end_time, data_loader, **kwargs)
+  File "C:\Users\Jon Kindel\.conda\envs\gecko_env_3_11\Lib\site-packages\qlib\data\dataset\handler.py", line 151, in __init__
+    self.setup_data()
+  File "C:\Users\Jon Kindel\.conda\envs\gecko_env_3_11\Lib\site-packages\qlib\data\dataset\handler.py", line 660, in setup_data
+    self.fit_process_data()
+  File "C:\Users\Jon Kindel\.conda\envs\gecko_env_3_11\Lib\site-packages\qlib\data\dataset\handler.py", line 528, in fit_process_data
+    self.process_data(with_fit=True)
+  File "C:\Users\Jon Kindel\.conda\envs\gecko_env_3_11\Lib\site-packages\qlib\data\dataset\handler.py", line 608, in process_data
+    _learn_df = self._run_proc_l(_learn_df, self.learn_processors, with_fit=with_fit, check_for_infer=False)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Jon Kindel\.conda\envs\gecko_env_3_11\Lib\site-packages\qlib\data\dataset\handler.py", line 540, in _run_proc_l
+    df = proc(df)
+         ^^^^^^^^
+  File "C:\Users\Jon Kindel\.conda\envs\gecko_env_3_11\Lib\site-packages\qlib\data\dataset\processor.py", line 99, in __call__
+    return df.dropna(subset=get_group_columns(df, self.fields_group))
+                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Jon Kindel\.conda\envs\gecko_env_3_11\Lib\site-packages\qlib\data\dataset\processor.py", line 32, in get_group_columns
+    return df.columns[df.columns.get_loc(group)]
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Jon Kindel\.conda\envs\gecko_env_3_11\Lib\site-packages\pandas\core\indexes\multi.py", line 3059, in get_loc
+    loc = self._get_level_indexer(key, level=0)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Jon Kindel\.conda\envs\gecko_env_3_11\Lib\site-packages\pandas\core\indexes\multi.py", line 3410, in _get_level_indexer
+    idx = self._get_loc_single_level_index(level_index, key)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Jon Kindel\.conda\envs\gecko_env_3_11\Lib\site-packages\pandas\core\indexes\multi.py", line 2999, in _get_loc_single_level_index
+    return level_index.get_loc(key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Jon Kindel\.conda\envs\gecko_env_3_11\Lib\site-packages\pandas\core\indexes\base.py", line 3819, in get_loc
+    raise KeyError(key) from err
+
+ERROR conda.cli.main_run:execute(127): `conda run python c:/Projects/q50_validation_process/qlib_data_integrity_check.py` failed. (See above for error)
+```
