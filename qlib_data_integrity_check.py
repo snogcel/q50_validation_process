@@ -65,8 +65,8 @@ if __name__ == '__main__':
     # IGNORE
     
     df = D.features(
-        ["btcusdt"],
-        ["$open", "$high", "$low", "$close"],
+        ["gdelt_btc_feat_v2"],
+        ["$btc_dom","$fg_index"],
         start_time="2020-05-01",
         end_time="2020-05-31"
     )
