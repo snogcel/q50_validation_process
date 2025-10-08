@@ -315,6 +315,95 @@ RSV3
 LABEL0
 ```
 
+### TODO:
+
+
+> https://github.com/snogcel/qlib_trading_v2/blob/main/hummingbot_backtest_results/metrics.json
+
+> https://github.com/snogcel/qlib_trading_v2/commit/d17245f1b068a9ef52c2780f78454817cb323e8b
+
+### Decision Trees at 11 depth at Q10, Q50, Q90 should provide the best predictive model.
+
+TODO - validate new dataset
+
+### Case Study Summary - https://www.geeksforgeeks.org/machine-learning/lightgbm-light-gradient-boosting-machine/
+
+```bash
+LightGBM Core Parameters
+
+LightGBM’s performance is heavily influenced by the core parameters that control the structure and optimization of the model. Below are some of the key parameters:
+
+    objective: Specifies the loss function to optimize during training. LightGBM supports various objectives such as regression, binary classification and multiclass classification.
+    task: It specifies the task we wish to perform which is either train or prediction. The default entry is train.
+    num_leaves: Specifies the maximum number of leaves in each tree. Higher values allow the model to capture more complex patterns but may lead to overfitting.
+    learning_rate: Determines the step size at each iteration during gradient descent. Lower values result in slower learning but may improve generalization.
+    max_depth: Sets the maximum depth of each tree.
+    min_data_in_leaf: Specifies the minimum number of data points required to form a leaf node. Higher values help prevent overfitting but may result in underfitting.
+    num_iterations: It specifies the number of iterations to be performed. The default value is 100.
+    feature_fraction: Controls the fraction of features to consider when building each tree. Randomly selecting a subset of features helps improve model diversity and reduce overfitting.
+    bagging_fraction: Specifies the fraction of data to be used for bagging (sampling data points with replacement) during training.
+    L1 and L2: Regularization parameters that control L1 and L2 regularization respectively. They penalize large coefficients to prevent overfitting.
+    min_split_gain: Specifies the minimum gain required to split a node further. It helps control the tree's growth and prevents unnecessary splits.
+    categorical_feature : It specifies the categorical feature used for training model.
+```
+
+### How This Open Source Predictive Model Works:
+
+```bash
+CORE_LGBM_PARAMS = {
+        "objective": "quantile",
+        "metric": ["l1", "l2"], # , "l2", "l1" # "rmse"
+        "boosting_type": "gbdt",
+        "device": "cpu",
+        "verbose": 1, # set to verbose for more logs (this is outrageously complex lol)
+        "random_state": 141551, # https://thinkingmachines.ai/blog/defeating-nondeterminism-in-llm-inference/
+        "early_stopping_rounds": 500,
+        "num_boost_round": 2250,         # Let early stopping decide
+        "seed": SEED
+    }
+
+    GENERIC_LGBM_PARAMS = {       
+        # Conservative learning settings for feature exploration
+        "learning_rate": 0.1,           # Moderate learning rate
+        # "num_leaves": 64,                # Balanced complexity
+        # "max_depth": 8,                  # Reasonable depth for GDELT features
+        
+        # Regularization (moderate to prevent overfitting)
+        "lambda_l1": 0.1,
+        "lambda_l2": 0.1,
+        
+        # "min_data_in_leaf": 20, # remove constraint for tuning
+        
+        "feature_fraction": 0.8,         # Use 80% of features per tree
+        "bagging_fraction": 0.8,         # Use 80% of data per iteration
+        "bagging_freq": 5,
+    }
+
+    # INIT_QLIB_INSTANCE
+    # pass multi_quantile_params into QLib architecture
+
+    multi_quantile_params = {
+        # 0.1: {'learning_rate': 0.060555113429817814, 'colsample_bytree': 0.7214813020361056, 'subsample': 0.7849919729082881, 'lambda_l1': 8.722794281828277e-05, 'lambda_l2': 3.220667556916701e-05, 'max_depth': 10, 'num_leaves': 224, **GENERIC_LGBM_PARAMS},
+        # 0.5: {'learning_rate': 0.02753370821225369, 'max_depth': -1, 'lambda_l1': 0.1, 'lambda_l2': 0.1, **GENERIC_LGBM_PARAMS},
+        # 0.9: {'learning_rate': 0.09355380738420341, 'max_depth': 10, 'num_leaves': 249, 'lambda_l1': 0.1, 'lambda_l2': 0.1, **GENERIC_LGBM_PARAMS}
+
+        # 0.1: {**CORE_LGBM_PARAMS},
+        # 0.5: {**CORE_LGBM_PARAMS},                
+        # 0.9: {**CORE_LGBM_PARAMS} 
+
+        # 11 is a good, even tree depth (see: https://www.geeksforgeeks.org/machine-learning/lightgbm-light-gradient-boosting-machine/)
+
+        0.1: {'max_depth': 11, **CORE_LGBM_PARAMS},
+        0.5: {'max_depth': 11, **CORE_LGBM_PARAMS},                
+        0.9: {'max_depth': 11, **CORE_LGBM_PARAMS}
+
+    }
+```
+
+
+
+
+
 ## Requirements
 
 ```bash
