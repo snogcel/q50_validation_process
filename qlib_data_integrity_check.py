@@ -73,7 +73,11 @@ if __name__ == '__main__':
 
     print(df)
 
-    # raise SystemExit()
+    raise SystemExit()
+
+    # Case Study Research
+    # see: https://www.geeksforgeeks.org/machine-learning/lightgbm-light-gradient-boosting-machine/
+
 
     # null data is being offset against the calendar.txt file
 
