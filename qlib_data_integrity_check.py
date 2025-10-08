@@ -87,10 +87,24 @@ if __name__ == '__main__':
 
     # this is a perfect way to complete the task I planned to work on previously.
 
+    # freq_config for crypto_data_loader
+    # label, in this case, contains the thing we are trying to predict (upward / downward movement of price)
+    # 60min btcusdt
 
+    """ @staticmethod
+    def get_label_config():        
+        return ["Ref($close, -2)/Ref($close, -1) - 1"], ["LABEL0"] """
+
+    """ 
     freq_config = {
         "feature": "60min", 
         "label": "day"
+    }
+    """
+
+    # freq_config for gdelt_data_loader
+    freq_config = {
+        "feature": "day"
     }
 
     inst_processors = [
@@ -123,9 +137,10 @@ if __name__ == '__main__':
         "module_path": "src.data.gdelt_loader",
         "kwargs": {
             "config": {
-                "feature": gdelt_dataloader.get_feature_config()
+                "feature": gdelt_dataloader.get_feature_config(),
+                "label": crypto_dataloader.get_label_config(),
             },
-            "freq": freq_config["label"],  # "day"
+            "freq": freq_config["feature"],  # "day"
             "inst_processors": inst_processors
         }
     }
@@ -136,8 +151,22 @@ if __name__ == '__main__':
     infer_processors = check_transform_proc(_infer_processors, fit_start_time, fit_end_time)
     learn_processors = check_transform_proc(_learn_processors, fit_start_time, fit_end_time)
 
-    handler_config = {
+    # handler config for crypto_data_loader
+    """ handler_config = {
         "instruments": ["BTCUSDT"],
+        "start_time": train_start_time,
+        "end_time": test_end_time,                
+        "data_loader": gdelt_data_loader,        
+        "infer_processors": infer_processors,
+        "learn_processors": learn_processors,
+        "shared_processors": [],
+        "process_type": DataHandlerLP.PTYPE_A,
+        "drop_raw": False 
+    } """
+
+    # handler config for gdelt_data_loader
+    handler_config = {
+        "instruments": ["GDELT_BTC_FEAT_V2"],
         "start_time": train_start_time,
         "end_time": test_end_time,                
         "data_loader": gdelt_data_loader,        
@@ -172,9 +201,14 @@ if __name__ == '__main__':
 
     dataset = init_instance_by_config(task_config["dataset"])
 
-    # prepare segments
-    df_train, df_valid, df_test = dataset.prepare(
+    # prepare segments _ crypto_data_loader
+    """ df_train, df_valid, df_test = dataset.prepare(
         segments=["train", "valid", "test"], col_set=["feature", "label"], data_key=DataHandlerLP.DK_L
+    ) """
+
+    # prepare segments _ gdelt_data_loader
+    df_train, df_valid, df_test = dataset.prepare(
+        segments=["train", "valid", "test"], col_set=["feature"], data_key=DataHandlerLP.DK_L
     )
 
     print(df_train)
