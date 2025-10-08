@@ -73,7 +73,7 @@ if __name__ == '__main__':
 
     print(df)
 
-    raise SystemExit()
+    # raise SystemExit()
 
     # null data is being offset against the calendar.txt file
 
@@ -114,6 +114,18 @@ if __name__ == '__main__':
         }
     }
 
+    gdelt_data_loader = {
+        "class": "gdelt_dataloader_optimized",
+        "module_path": "src.data.gdelt_loader",
+        "kwargs": {
+            "config": {
+                "feature": gdelt_dataloader.get_feature_config()
+            },
+            "freq": freq_config["label"],  # "day"
+            "inst_processors": inst_processors
+        }
+    }
+
     _learn_processors = [{"class": "DropnaLabel"},]
     _infer_processors = []
 
@@ -124,7 +136,7 @@ if __name__ == '__main__':
         "instruments": ["BTCUSDT"],
         "start_time": train_start_time,
         "end_time": test_end_time,                
-        "data_loader": crypto_data_loader,        
+        "data_loader": gdelt_data_loader,        
         "infer_processors": infer_processors,
         "learn_processors": learn_processors,
         "shared_processors": [],
