@@ -55,7 +55,12 @@ class CustomNestedDataLoader(DataLoader):
         df_full = None
         for dl in self.data_loader_l:
             try:
+                
+                print("_DF_CURRENT_")
                 df_current = dl.load(instruments, start_time, end_time)
+                df_current.to_csv("df_current.csv")
+                raise SystemExit()
+
             except KeyError:
                 warnings.warn(
                     "If the value of `instruments` cannot be processed, it will set instruments to None to get all the data."
