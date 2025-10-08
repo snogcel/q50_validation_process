@@ -85,6 +85,19 @@ class CustomNestedDataLoader(DataLoader):
                 ### previously used for merging day:day timeframes, adjusted to merge_asof to allow for hour:day merge
                 # df_merged = pd.merge(left=df_full, right=df_current, left_index=True, right_index=True, how=self.join)
 
+                # BTCUSDT Data Set
+                # Contains "Label", which is the feature we are attempting to predict.
+                print("_BTCUSDT_")
+                print("Contains \"Label\", which is the feature we are attempting to predict.")
+                print(df_current)
+
+                # GDELT_BTC_FEAT_v2
+                # Currently contains fg_index (BTCUSDT Fear & Greed Index) and btc_dom (Bitcoin Dominance, which is a measure of overall market cap of Bitcoin vs. Alt Coins)
+                print("_BTCUSDT Fear & Greed Index, BTC.D which is a measure of BTC market cap %_")
+                print("Currently contains fg_index (BTCUSDT Fear & Greed Index) and btc_dom (Bitcoin Dominance, which is a measure of overall market cap of Bitcoin vs. Alt Coins)")
+                print(df_full)
+                raise SystemExit()
+
                 df_merged = pd.merge_asof(left=df_full, right=df_current, on="datetime")
                 df_merged.reset_index(drop=True, inplace=True)               
                 df_merged.set_index(['instrument', 'datetime'], inplace=True)
